@@ -22,6 +22,14 @@ jobs:
 
       - name: set version
         run: mvn -B versions:set -DnewVersion=1.0.${{ github.run_number }} -DgenerateBackupPoms=false
+
+      - name: debug secret
+        run: |
+          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
+            echo "SECRET IS EMPTY"
+          else
+            echo "SECRET IS SET"
+          fi
       
       - name: build docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/java_image:1.0.${{ github.run_number }} -t ${{ secrets.DOCKER_USERNAME }}/java_image:latest .
@@ -41,10 +49,3 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/java_image:1.0.${{ github.run_number }}
           docker push ${{ secrets.DOCKER_USERNAME }}/java_image:latest
       
-      - name: debug secret
-        run: |
-          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
-            echo "SECRET IS EMPTY"
-          else
-            echo "SECRET IS SET"
-          fi
