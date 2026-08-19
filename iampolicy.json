@@ -8,14 +8,16 @@
       "Resource": "*"
     },
     {
-      "Sid": "PushToSpecificRepo",
+      "Sid": "PushPullSpecificRepo",
       "Effect": "Allow",
       "Action": [
         "ecr:BatchCheckLayerAvailability",
         "ecr:InitiateLayerUpload",
         "ecr:UploadLayerPart",
         "ecr:CompleteLayerUpload",
-        "ecr:PutImage"
+        "ecr:PutImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
       ],
       "Resource": "arn:aws:ecr:eu-west-1:581351186844:repository/github-actions/aws-pipeline"
     }
