@@ -43,4 +43,4 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/java_image:latest
       
       - name: deploy test
-        run: docker run --rm java_app | grep -q "Hello World!" && echo "Success" || exit 1
+        run: docker run --rm ${{ secrets.DOCKERHUB_USERNAME }}/java_image:1.0.${{ github.run_number }} | grep -q "Hello World!" && echo "Success" || exit 1
